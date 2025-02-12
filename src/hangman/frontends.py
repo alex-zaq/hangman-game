@@ -1,0 +1,2 @@
+class HangmanFrontend:
+    pass
