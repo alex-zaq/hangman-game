@@ -21,23 +21,22 @@ class State:
 
 
 class HangmanBackend:
-    def __init__(self, words_db: list):
-        self._words_db = words_db
-        self._reset()
+    def __init__(self, words):
+        self._words_lst = words
 
-    def _reset(self):
-        self._chosen_word = self._choose_random_word()
+    def reset(self):
+        self._chosen_word = self.choose_random_word()
         self._word_lst = list(self._chosen_word)
         self._wrong_letters_count = 0
         self._game_status = GameStatus.IN_PROGRESS
 
-    def _choose_random_word(self) -> None:
-        chosen_word = random.choice(self._words_db)
+    def choose_random_word(self) -> None:
+        chosen_word = random.choice(self._words_lst)
         return chosen_word
 
-    def _increase_wrong_letters_count(self) -> None:
-        self.wrong_letters_count += 1
-        if self.wrong_letters_count == MAX_WRONG_LETTERS_COUNT:
+    def increase_wrong_letters_count(self) -> None:
+        self._wrong_letters_count += 1
+        if self._wrong_letters_count >= MAX_WRONG_LETTERS_COUNT:
             self.game_status = GameStatus.LOSE
 
     def guess(self, letter: str) -> bool:
@@ -45,20 +44,30 @@ class HangmanBackend:
             raise Exception(f"Game over {self.game_status}")
 
         if letter not in self._word_lst:
-            self._increase_wrong_letters_count()
+            self.increase_wrong_letters_count()
             return False
 
         self._word_lst = [x if x != letter else "+" for x in self._word_lst]
 
         if all(x == "+" for x in self._word_lst):
-            self.state.game_status = GameStatus.WIN
+            self._game_status = GameStatus.WIN
 
         return True
 
+    def get_status(self):
+        return self._game_status
+
     def get_state(self) -> State:
-        state = State()
-        state.game_status = self._game_status
-        state.wrong_letters_count = self._wrong_letters_count
-        state.chosen_word = self._chosen_word
-        state.word_lst = self._word_lst
+        state = State(
+            game_status=self._game_status,
+            wrong_letters_count=self._wrong_letters_count,
+            chosen_word=self._chosen_word,
+            word_lst=self._word_lst,
+        )
         return state
+
+    def set_state(self, state: State):
+        self._game_status = state.game_status
+        self._wrong_letters_count = state.wrong_letters_count
+        self._chosen_word = state.chosen_word
+        self._word_lst = state.word_lst
