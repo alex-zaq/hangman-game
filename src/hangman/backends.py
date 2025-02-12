@@ -21,20 +21,17 @@ class State:
 
 
 class HangmanBackend:
-    def __init__(self, words_db: list, min_len: int = DEFAULT_MIN_LEN):
+    def __init__(self, words_db: list):
         self._words_db = words_db
-        self._reset(min_len)
+        self._reset()
 
-    def _reset(self, min_len: int):
-        self._chosen_word = self._choose_random_word(self.min_len)
-        self._wrong_letters_count = 0
+    def _reset(self):
+        self._chosen_word = self._choose_random_word()
         self._word_lst = list(self._chosen_word)
+        self._wrong_letters_count = 0
         self._game_status = GameStatus.IN_PROGRESS
 
-    def _choose_random_word(self, min_len: int) -> None:
-        filterd_words = [word for word in self._words_db if len(word) >= min_len]
-        if not filterd_words:
-            raise Exception(f"No words with length >= {min_len}")
+    def _choose_random_word(self) -> None:
         chosen_word = random.choice(self._words_db)
         return chosen_word
 
