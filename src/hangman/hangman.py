@@ -1,4 +1,4 @@
-from hangman.backend import GameStatus
+from .backend import GameStatus
 
 
 class Hangman:

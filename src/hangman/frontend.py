@@ -1,4 +1,4 @@
-from hangman.backend import GameStatus
+from .backend import MAX_WRONG_LETTERS_COUNT, GameStatus
 
 hangman_stages = stages = [
     """
@@ -99,7 +99,7 @@ class HangmanFrontend:
         return self.stages_dict[stage]
 
     def _get_str_wrong_guesses(self):
-        return f"Wrong guesses: {self.state.wrong_letters_count}"
+        return f"Wrong guesses: {self.state.wrong_letters_count} / {MAX_WRONG_LETTERS_COUNT}"
 
     def _get_str_game_over(self):
         match self.state.game_status:
