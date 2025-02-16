@@ -1,5 +1,5 @@
 from .backend import GameStatus, HangmanBackend, State
-from .frontend import ConsoleFrontend
+from .frontends.console_frontend import ConsoleFrontend
 from .hangman import Hangman as Hangman
 from .word_reader import TextFileReader
 
