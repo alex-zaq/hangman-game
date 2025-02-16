@@ -1,4 +1,4 @@
-from src.hangman import Hangman, HangmanBackend, ConsoleFrontend
+from src.hangman import GuiFrontend, Hangman, HangmanBackend
 
 if __name__ == "__main__":
     
@@ -12,6 +12,9 @@ if __name__ == "__main__":
         "Журналист",
     ]
 
-    app = Hangman(frontend=ConsoleFrontend(), backend=HangmanBackend(words))
+    # console_app = Hangman(frontend=ConsoleFrontend(), backend=HangmanBackend(words))
+    # console_app.start_loop()
 
-    app.start_loop()
+
+    gui_app = Hangman(frontend=GuiFrontend(), backend=HangmanBackend(words))
+    gui_app.start_loop()
