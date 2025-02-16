@@ -8,6 +8,7 @@ def test_right_answers():
         State(
             game_status=GameStatus.IN_PROGRESS,
             wrong_letters_count=0,
+            wrong_letters=[],
             chosen_word=selected_word,
             word_lst=list(selected_word),
         )
@@ -31,6 +32,7 @@ def test_wrong_anserts():
         State(
             game_status=GameStatus.IN_PROGRESS,
             wrong_letters_count=0,
+            wrong_letters=[],
             chosen_word=selected_word,
             word_lst=list(selected_word),
         )
