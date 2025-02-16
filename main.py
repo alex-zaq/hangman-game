@@ -1,4 +1,4 @@
-from src.hangman import Hangman, HangmanBackend, HangmanFrontend
+from src.hangman import Hangman, HangmanBackend, ConsoleFrontend
 
 if __name__ == "__main__":
     
@@ -12,6 +12,6 @@ if __name__ == "__main__":
         "Журналист",
     ]
 
-    app = Hangman(frontend=HangmanFrontend(), backend=HangmanBackend(words))
+    app = Hangman(frontend=ConsoleFrontend(), backend=HangmanBackend(words))
 
     app.start_loop()

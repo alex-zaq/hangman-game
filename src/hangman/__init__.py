@@ -1,10 +1,10 @@
 from .backend import GameStatus, HangmanBackend, State
-from .frontend import HangmanFrontend
+from .frontend import ConsoleFrontend
 from .hangman import Hangman as Hangman
 from .word_reader import TextFileReader
 
 __all__ = [
-    "HangmanFrontend",
+    "ConsoleFrontend",
     "HangmanBackend",
     "Hangman",
     "TextFileReader",

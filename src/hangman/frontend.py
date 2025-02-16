@@ -67,7 +67,7 @@ hangman_stages = stages = [
 ]
 
 
-class HangmanFrontend:
+class ConsoleFrontend:
     def __init__(self):
         self.stages_dict = {i: elem for i, elem in enumerate(reversed(stages))}
 
