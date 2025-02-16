@@ -1,75 +1,26 @@
-from .backend import MAX_WRONG_LETTERS_COUNT, GameStatus
-
-hangman_stages = stages = [
-    """
-         --------
-         |      |
-         |      O
-         |     \\|/
-         |      |
-         |     / \\
-         -
-      """,
-    """
-         --------
-         |      |
-         |      O
-         |     \\|/
-         |      |
-         |     / 
-         -
-      """,
-    """
-         --------
-         |      |
-         |      O
-         |     \\|/
-         |      |
-         |      
-         -
-      """,
-    """
-         --------
-         |      |
-         |      O
-         |     \\|
-         |      |
-         |     
-         -
-      """,
-    """
-         --------
-         |      |
-         |      O
-         |      |
-         |      |
-         |     
-         -
-      """,
-    """
-         --------
-         |      |
-         |      O
-         |    
-         |      
-         |     
-         -
-      """,
-    """
-         --------
-         |      |
-         |      
-         |    
-         |      
-         |     
-         -
-      """,
-]
+from ..backend import MAX_WRONG_LETTERS_COUNT, GameStatus
+from .stages import hangman_stages as stages
 
 
 class ConsoleFrontend:
     def __init__(self):
-        self.stages_dict = {i: elem for i, elem in enumerate(reversed(stages))}
+        self.stages_dict = {i: elem for i, elem in enumerate(stages)}
+
+
+    def show_start_menu(self):
+        print("Hangman")
+
+        
+    def stop(self):
+        ...
+
+
+    def read_keys_menu(self):
+        return input("n - New Game, q - Quit:").lower()
+
+    def read_keys(self):
+        return input("Enter a letter: ").lower()
+        
 
     def set_state(self, state):
         self.state = state
