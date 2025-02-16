@@ -16,6 +16,7 @@ class GameStatus(Enum):
 class State:
     game_status: GameStatus
     wrong_letters_count: int
+    wrong_letters: list
     chosen_word: str
     word_lst: list
 
@@ -27,6 +28,7 @@ class HangmanBackend:
     def reset(self):
         self._chosen_word = self.choose_random_word()
         self._word_lst = list(self._chosen_word)
+        self._wrong_letters = []
         self._wrong_letters_count = 0
         self._game_status = GameStatus.IN_PROGRESS
 
@@ -42,11 +44,13 @@ class HangmanBackend:
     def guess(self, letter: str) -> bool:
         if self._game_status in (GameStatus.WIN, GameStatus.LOSE):
             return False
-            # raise Exception(f"Game over {self._game_status}")
 
         if letter not in self._word_lst:
             self.increase_wrong_letters_count()
+            self._wrong_letters.append(letter)
             return False
+
+        
 
         self._word_lst = [x if x != letter else "+" for x in self._word_lst]
 
@@ -62,6 +66,7 @@ class HangmanBackend:
         state = State(
             game_status=self._game_status,
             wrong_letters_count=self._wrong_letters_count,
+            wrong_letters=self._wrong_letters,
             chosen_word=self._chosen_word,
             word_lst=self._word_lst,
         )
@@ -70,5 +75,6 @@ class HangmanBackend:
     def set_state(self, state: State):
         self._game_status = state.game_status
         self._wrong_letters_count = state.wrong_letters_count
+        self._wrong_letters = state.wrong_letters
         self._chosen_word = state.chosen_word
         self._word_lst = state.word_lst
