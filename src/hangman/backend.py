@@ -33,7 +33,9 @@ class HangmanBackend:
         self._game_status = GameStatus.IN_PROGRESS
 
     def choose_random_word(self) -> None:
-        chosen_word = random.choice(self._words_lst).lower()
+        random.shuffle(self._words_lst)
+        chosen_word = random.choice(self._words_lst)
+        chosen_word = chosen_word.lower()
         return chosen_word
 
     def increase_wrong_letters_count(self) -> None:
@@ -49,8 +51,6 @@ class HangmanBackend:
             self.increase_wrong_letters_count()
             self._wrong_letters.append(letter)
             return False
-
-        
 
         self._word_lst = [x if x != letter else "+" for x in self._word_lst]
 
